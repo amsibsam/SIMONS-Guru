@@ -4,6 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- text Size-->
-    <dimen name="toolar_title">18sp</dimen>
+    <dimen name="toolar_title">13sp</dimen>
     <dimen name="btn_text_normal">18sp</dimen>
 </resources>

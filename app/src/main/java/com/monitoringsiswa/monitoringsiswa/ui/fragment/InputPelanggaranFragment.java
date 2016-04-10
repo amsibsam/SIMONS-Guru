@@ -12,7 +12,7 @@ import com.monitoringsiswa.monitoringsiswa.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InputPelanggaranFragment extends Fragment {
+public class InputPelanggaranFragment extends android.support.v4.app.Fragment {
 
 
     public InputPelanggaranFragment() {

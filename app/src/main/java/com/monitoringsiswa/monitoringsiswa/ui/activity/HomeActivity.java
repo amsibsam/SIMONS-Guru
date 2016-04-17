@@ -25,8 +25,8 @@ public class HomeActivity extends AppCompatActivity {
         viewPager = binding.pager;
 
         setSupportActionBar(binding.toolbar);
-        tabLayout.addTab(tabLayout.newTab().setText("Home"));
-        tabLayout.addTab(tabLayout.newTab().setText("Input Pelanggaran"));
+        tabLayout.addTab(tabLayout.newTab().setCustomView(R.layout.tab_home));
+        tabLayout.addTab(tabLayout.newTab().setCustomView(R.layout.tab_input));
 
         final PagerAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

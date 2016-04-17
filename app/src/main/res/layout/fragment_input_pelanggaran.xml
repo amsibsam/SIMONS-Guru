@@ -2,12 +2,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="6dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="12dp"
+    android:background="@color/background"
     tools:context="com.monitoringsiswa.monitoringsiswa.ui.fragment.InputPelanggaranFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Input Pelanggaran Fragment" />
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_above="@+id/btn_simpan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/main_contenet_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nomor_induk_siswa"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/et_nomer_induk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="18sp"
+                    style="@style/EditTextPurple"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/kategori_pelanggaran"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_kategori_pelanggaran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></Spinner>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/pelanggaran"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_pelanggaran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></Spinner>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/poin_pelanggaran"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/et_poin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="18sp"
+                    style="@style/EditTextPurple"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+        <Button
+            android:id="@+id/btn_simpan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SIMPAN"
+            android:background="@drawable/btn_bottom_purple"
+            android:textColor="@android:color/white"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
 
 </FrameLayout>

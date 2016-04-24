@@ -61,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
                         Log.e("amsibsam", "login error "+e.getMessage());
                         if (e.toString().equals("retrofit.HttpException: HTTP 401 Unauthorized")){
                             Toast.makeText(LoginActivity.this, "Username dan password salah", Toast.LENGTH_SHORT).show();
@@ -72,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(Guru guru) {
-                        Log.d("amsibsam", "guru "+guru.getNamaGuru());
                         progressDialog.dismiss();
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     }

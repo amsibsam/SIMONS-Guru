@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="itemViewModel"
+            type="com.monitoringsiswa.monitoringsiswa.viewmodel.PelanggaranViewModel"/>
+    </data>
+
+<RelativeLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp">
@@ -34,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
-                    android:text="Nurcahyo Bintoro"
+                    android:text="@{itemViewModel.name}"
                     />
             </LinearLayout>
             <!-- icon and texr wrapper-->
@@ -52,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
-                    android:text="Nurcahyo Bintoro"
+                    android:text="@{itemViewModel.kelas}"
                     />
             </LinearLayout>
             <!-- icon and texr wrapper-->
@@ -155,4 +164,4 @@
 
 
 
-</RelativeLayout>
+</RelativeLayout></layout>

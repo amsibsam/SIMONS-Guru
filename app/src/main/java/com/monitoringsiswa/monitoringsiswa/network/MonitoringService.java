@@ -7,10 +7,12 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.monitoringsiswa.monitoringsiswa.pojo.Guru;
+import com.monitoringsiswa.monitoringsiswa.pojo.Pelanggaran;
 import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import retrofit.BaseUrl;
@@ -20,7 +22,9 @@ import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
+import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.Query;
 import rx.Observable;
 import rx.functions.Func1;
 
@@ -33,6 +37,8 @@ public class MonitoringService {
         @POST("guru/login")
         Observable<LoginResponse> login(@Field("username") String username,
                                         @Field("password") String password);
+        @GET("guru/pelanggaran/1")
+        Observable<PelanggaranResponse> getPelanggaran();
     }
 
     private KilapApi kilapApi;
@@ -91,6 +97,22 @@ public class MonitoringService {
                 });
     }
 
+    public Observable<Pelanggaran> getPelanggaran(){
+        return kilapApi.getPelanggaran()
+                .flatMap(new Func1<PelanggaranResponse, Observable<PelanggaranResponse.Data.Pelanggaran>>() {
+                    @Override
+                    public Observable<PelanggaranResponse.Data.Pelanggaran> call(PelanggaranResponse pelanggaranResponse) {
+                        return Observable.from(pelanggaranResponse.data.pelanggaran);
+                    }
+                })
+                .map(new Func1<PelanggaranResponse.Data.Pelanggaran, Pelanggaran>() {
+                    @Override
+                    public Pelanggaran call(PelanggaranResponse.Data.Pelanggaran pelanggaran) {
+                        return pelanggaran.toPelanggaranPojo();
+                    }
+                });
+    }
+
     private class LoginResponse{
         Data data;
 
@@ -117,7 +139,28 @@ public class MonitoringService {
     }
 
 
+    private class PelanggaranResponse{
+        Data data;
 
+        class Data{
+            List<Pelanggaran> pelanggaran;
+
+            class Pelanggaran{
+                int id;
+                String tanggal;
+                int siswaId;
+                int nis;
+                String namaSiswa;
+                String namaKelas;
+                String namaPoinPelanggaran;
+                int poin;
+
+                com.monitoringsiswa.monitoringsiswa.pojo.Pelanggaran toPelanggaranPojo(){
+                    return new com.monitoringsiswa.monitoringsiswa.pojo.Pelanggaran(id, tanggal,siswaId, nis, namaSiswa, namaKelas, namaPoinPelanggaran, poin);
+                }
+            }
+        }
+    }
 
 
 

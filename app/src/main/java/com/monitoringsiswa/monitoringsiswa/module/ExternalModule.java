@@ -15,7 +15,7 @@ import dagger.Provides;
 public final class ExternalModule {
     @Provides
     @Singleton
-    MonitoringService providetesService(Context context) {
+    MonitoringService provideMonitoringService(Context context) {
         return new MonitoringService(context);
     }
 }

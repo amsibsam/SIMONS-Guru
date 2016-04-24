@@ -19,10 +19,9 @@ import dagger.Component;
 @Component(modules = {
         ApplicationModule.class,
         InternalModule.class,
-        ExternalModule.class,
+        ExternalModule.class
 })
 public interface MonitoringComponent {
-        void inject(MainActivity mainActivity);
         void inject(LoginActivity loginActivity);
 
         final class Initializer {

@@ -46,7 +46,7 @@ public class MonitoringService {
         BaseUrl baseUrl = new BaseUrl() {
             @Override
             public HttpUrl url() {
-                final String baseUrl = "http://192.168.1.100:8000/";
+                final String baseUrl = "http://si-monitoring.herokuapp.com/api/";
                 return HttpUrl.parse(baseUrl);
             }
         };

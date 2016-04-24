@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.monitoringsiswa.monitoringsiswa.MonitoringApplication;
 import com.monitoringsiswa.monitoringsiswa.R;
@@ -60,14 +61,18 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("amsibsam", "login error "+e.toString());
+
+                        Log.e("amsibsam", "login error "+e.getMessage());
+                        if (e.toString().equals("retrofit.HttpException: HTTP 401 Unauthorized")){
+                            Toast.makeText(LoginActivity.this, "Username dan password salah", Toast.LENGTH_SHORT).show();
+                        }
+                        
                         progressDialog.dismiss();
                     }
 
                     @Override
                     public void onNext(Guru guru) {
                         Log.d("amsibsam", "guru "+guru.getNamaGuru());
-                        accountInfoStore.cacheAccountInfo(guru);
                         progressDialog.dismiss();
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     }

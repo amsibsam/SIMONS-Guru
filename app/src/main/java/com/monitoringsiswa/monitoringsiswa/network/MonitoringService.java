@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.monitoringsiswa.monitoringsiswa.pojo.Guru;
 import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
@@ -17,13 +18,21 @@ import retrofit.GsonConverterFactory;
 import retrofit.HttpException;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
+import retrofit.http.POST;
+import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * Created by root on 09/04/16.
  */
 public class MonitoringService {
     private interface KilapApi {
-
+        @FormUrlEncoded
+        @POST("guru/login")
+        Observable<LoginResponse> login(@Field("username") String username,
+                                        @Field("password") String password);
     }
 
     private KilapApi kilapApi;
@@ -69,6 +78,41 @@ public class MonitoringService {
         // 5. Finally, we can create the model of the API.
         kilapApi = retrofit.create(KilapApi.class);
 
+
+    }
+
+    public Observable<Guru> login(String username, String password){
+        return kilapApi.login(username, password)
+                .map(new Func1<LoginResponse, Guru>() {
+                    @Override
+                    public Guru call(LoginResponse loginResponse) {
+                        return loginResponse.data.guru.toGuruPojo();
+                    }
+                });
+    }
+
+    private class LoginResponse{
+        Data data;
+
+        class Data{
+            Guru guru;
+
+            class Guru{
+                int id;
+                String nip;
+                String namaGuru;
+                String jenisKelamin;
+                String nomorHp;
+                String jabatan;
+                String username;
+
+                com.monitoringsiswa.monitoringsiswa.pojo.Guru toGuruPojo(){
+                    return new com.monitoringsiswa.monitoringsiswa.pojo.Guru(
+                            id, nip, namaGuru, jenisKelamin, nomorHp, jabatan
+                            , username);
+                }
+            }
+        }
 
     }
 

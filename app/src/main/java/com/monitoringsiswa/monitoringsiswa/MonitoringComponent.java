@@ -6,6 +6,7 @@ import android.app.Application;
 import com.monitoringsiswa.monitoringsiswa.module.ApplicationModule;
 import com.monitoringsiswa.monitoringsiswa.module.ExternalModule;
 import com.monitoringsiswa.monitoringsiswa.module.InternalModule;
+import com.monitoringsiswa.monitoringsiswa.ui.activity.LoginActivity;
 
 import javax.inject.Singleton;
 
@@ -22,6 +23,7 @@ import dagger.Component;
 })
 public interface MonitoringComponent {
         void inject(MainActivity mainActivity);
+        void inject(LoginActivity loginActivity);
 
         final class Initializer {
                 public static MonitoringComponent init(Application application) {

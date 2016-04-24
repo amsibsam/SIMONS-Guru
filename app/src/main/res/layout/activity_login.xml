@@ -48,11 +48,12 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@android:color/white">
                 <EditText
+                    android:id="@+id/username"
                     android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@android:color/white"
-                    android:hint="username (NIM)"
+                    android:hint="username"
                     android:theme="@style/EditTextWhite"
                     />
 
@@ -62,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@android:color/white">
                 <EditText
+                    android:id="@+id/password"
                     android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

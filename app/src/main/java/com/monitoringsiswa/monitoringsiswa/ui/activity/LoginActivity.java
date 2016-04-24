@@ -11,6 +11,7 @@ import android.view.View;
 import com.monitoringsiswa.monitoringsiswa.MonitoringApplication;
 import com.monitoringsiswa.monitoringsiswa.R;
 import com.monitoringsiswa.monitoringsiswa.databinding.ActivityLoginBinding;
+import com.monitoringsiswa.monitoringsiswa.module.AccountInfoStore;
 import com.monitoringsiswa.monitoringsiswa.network.MonitoringService;
 import com.monitoringsiswa.monitoringsiswa.pojo.Guru;
 
@@ -25,6 +26,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @Inject
     MonitoringService monitoringService;
+
+    @Inject
+    AccountInfoStore accountInfoStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(Guru guru) {
+                        Log.d("amsibsam", "guru "+guru.getNamaGuru());
+                        accountInfoStore.cacheAccountInfo(guru);
                         progressDialog.dismiss();
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     }

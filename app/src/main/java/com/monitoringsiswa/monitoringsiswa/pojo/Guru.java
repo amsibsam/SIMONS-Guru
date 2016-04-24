@@ -45,4 +45,8 @@ public class Guru {
     public String getJabatan() {
         return jabatan;
     }
+
+    public String getUsername() {
+        return username;
+    }
 }

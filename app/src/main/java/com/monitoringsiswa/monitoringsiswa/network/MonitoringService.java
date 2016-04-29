@@ -7,7 +7,9 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.monitoringsiswa.monitoringsiswa.pojo.Guru;
+import com.monitoringsiswa.monitoringsiswa.pojo.KategoriPelanggaran;
 import com.monitoringsiswa.monitoringsiswa.pojo.Pelanggaran;
+import com.monitoringsiswa.monitoringsiswa.pojo.PoinPelanggaran;
 import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
@@ -39,6 +41,21 @@ public class MonitoringService {
                                         @Field("password") String password);
         @GET("guru/pelanggaran/1")
         Observable<PelanggaranResponse> getPelanggaran();
+
+        @GET("guru/kategori-pelanggaran")
+        Observable<KategoriPelanggaranResponse> getKategoriPelanggaran();
+
+        @GET("guru/poin-pelanggaran/1")
+        Observable<PoinPelanggaranResponse> getPoinPelanggaran();
+
+        @FormUrlEncoded
+        @POST
+        Observable<PostPelanggaranResponse> postPelanggaran(@Field("tanggal") String tanggal,
+                                                            @Field("catatan") String catatan,
+                                                            @Field("nis") String nis,
+                                                            @Field("guru_id") int guruId,
+                                                            @Field("poin_pelanggaran_id") int poinPelanggaranId);
+
     }
 
     private KilapApi kilapApi;
@@ -113,6 +130,49 @@ public class MonitoringService {
                 });
     }
 
+    public Observable<KategoriPelanggaran> getKategoriPelanggaran(){
+        return kilapApi.getKategoriPelanggaran()
+                .flatMap(new Func1<KategoriPelanggaranResponse, Observable<KategoriPelanggaranResponse.Data.Kategori>>() {
+                    @Override
+                    public Observable<KategoriPelanggaranResponse.Data.Kategori> call(KategoriPelanggaranResponse kategoriPelanggaranResponse) {
+                        return Observable.from(kategoriPelanggaranResponse.data.kategoriPelanggaran);
+                    }
+                })
+                .map(new Func1<KategoriPelanggaranResponse.Data.Kategori, KategoriPelanggaran>() {
+                    @Override
+                    public KategoriPelanggaran call(KategoriPelanggaranResponse.Data.Kategori kategori) {
+                        return kategori.toKategoriPelanggaranPojo();
+                    }
+                });
+    }
+
+    public Observable<PoinPelanggaran> getPoinPelanggaran(){
+        return kilapApi.getPoinPelanggaran()
+                .flatMap(new Func1<PoinPelanggaranResponse, Observable<PoinPelanggaranResponse.Data.PoinPelanggaran>>() {
+                    @Override
+                    public Observable<PoinPelanggaranResponse.Data.PoinPelanggaran> call(PoinPelanggaranResponse poinPelanggaranResponse) {
+                        return Observable.from(poinPelanggaranResponse.data.poinPelanggaran);
+                    }
+                })
+                .map(new Func1<PoinPelanggaranResponse.Data.PoinPelanggaran, PoinPelanggaran>() {
+                    @Override
+                    public PoinPelanggaran call(PoinPelanggaranResponse.Data.PoinPelanggaran poinPelanggaran) {
+                        return poinPelanggaran.toPoinPelanggaranPojo();
+                    }
+                });
+    }
+
+    public Observable<String> postPelanggaran(String catatan, String nis, int guruId, final int poinPelanggaranId){
+//        TODO:make date not a hardcoded
+        return kilapApi.postPelanggaran("2016-04-21", catatan, nis, guruId, poinPelanggaranId)
+                .map(new Func1<PostPelanggaranResponse, String>() {
+                    @Override
+                    public String call(PostPelanggaranResponse postPelanggaranResponse) {
+                        return postPelanggaranResponse.message;
+                    }
+                });
+    }
+
     private class LoginResponse{
         Data data;
 
@@ -160,6 +220,52 @@ public class MonitoringService {
                 }
             }
         }
+    }
+
+    private class KategoriPelanggaranResponse{
+        String status;
+        Data data;
+
+        class Data{
+            List<Kategori> kategoriPelanggaran;
+
+            class Kategori{
+                int id;
+                String namaKategoriPelanggaran;
+
+                KategoriPelanggaran toKategoriPelanggaranPojo(){
+                    return new KategoriPelanggaran(id, namaKategoriPelanggaran);
+                }
+            }
+
+
+        }
+
+    }
+
+    private class PoinPelanggaranResponse{
+        String status;
+        Data data;
+
+        class Data{
+            List<PoinPelanggaran> poinPelanggaran;
+
+            class PoinPelanggaran{
+                int id;
+                String namaPoinPelanggaran;
+                int poin;
+                int kategoriPelanggaranId;
+
+                com.monitoringsiswa.monitoringsiswa.pojo.PoinPelanggaran toPoinPelanggaranPojo(){
+                    return new com.monitoringsiswa.monitoringsiswa.pojo.PoinPelanggaran(id, namaPoinPelanggaran, poin, kategoriPelanggaranId);
+                }
+            }
+        }
+    }
+
+    private class PostPelanggaranResponse{
+        String status;
+        String message;
     }
 
 

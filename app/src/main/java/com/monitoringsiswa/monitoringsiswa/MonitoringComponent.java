@@ -8,6 +8,7 @@ import com.monitoringsiswa.monitoringsiswa.module.ExternalModule;
 import com.monitoringsiswa.monitoringsiswa.module.InternalModule;
 import com.monitoringsiswa.monitoringsiswa.ui.activity.LoginActivity;
 import com.monitoringsiswa.monitoringsiswa.ui.fragment.HomeFragment;
+import com.monitoringsiswa.monitoringsiswa.ui.fragment.InputPelanggaranFragment;
 
 import javax.inject.Singleton;
 
@@ -25,6 +26,7 @@ import dagger.Component;
 public interface MonitoringComponent {
         void inject(LoginActivity loginActivity);
         void inject(HomeFragment homeFragment);
+        void inject(InputPelanggaranFragment inputPelanggaranFragment);
 
         final class Initializer {
                 public static MonitoringComponent init(Application application) {

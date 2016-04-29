@@ -1,5 +1,7 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="6dp"
@@ -77,6 +79,21 @@
                     android:textSize="18sp"
                     style="@style/EditTextPurple"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/catatan"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/et_catatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="18sp"
+                    style="@style/EditTextPurple"/>
+
             </LinearLayout>
 
         </ScrollView>
@@ -92,3 +109,4 @@
 
 
 </FrameLayout>
+</layout>

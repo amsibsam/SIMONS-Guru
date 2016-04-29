@@ -26,6 +26,7 @@ import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
 import rx.functions.Func1;
@@ -45,8 +46,8 @@ public class MonitoringService {
         @GET("guru/kategori-pelanggaran")
         Observable<KategoriPelanggaranResponse> getKategoriPelanggaran();
 
-        @GET("guru/poin-pelanggaran/1")
-        Observable<PoinPelanggaranResponse> getPoinPelanggaran();
+        @GET("guru/poin-pelanggaran/{id}")
+        Observable<PoinPelanggaranResponse> getPoinPelanggaran(@Path("id") int id);
 
         @FormUrlEncoded
         @POST
@@ -146,8 +147,8 @@ public class MonitoringService {
                 });
     }
 
-    public Observable<PoinPelanggaran> getPoinPelanggaran(){
-        return kilapApi.getPoinPelanggaran()
+    public Observable<PoinPelanggaran> getPoinPelanggaran(int id){
+        return kilapApi.getPoinPelanggaran(id)
                 .flatMap(new Func1<PoinPelanggaranResponse, Observable<PoinPelanggaranResponse.Data.PoinPelanggaran>>() {
                     @Override
                     public Observable<PoinPelanggaranResponse.Data.PoinPelanggaran> call(PoinPelanggaranResponse poinPelanggaranResponse) {

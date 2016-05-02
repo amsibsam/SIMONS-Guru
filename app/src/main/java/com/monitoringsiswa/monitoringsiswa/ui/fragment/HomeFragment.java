@@ -1,6 +1,7 @@
 package com.monitoringsiswa.monitoringsiswa.ui.fragment;
 
 
+import android.app.ProgressDialog;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.os.Bundle;
@@ -70,7 +71,8 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         public final ItemView itemView = ItemView.of(BR.itemViewModel, R.layout.item_siswa);
     }
 
-    private void getPelanggaran(){
+    public void getPelanggaran(){
+        binding.pbLoading.setVisibility(View.VISIBLE);
         pelanggaranListViewModel.items.clear();
         monitoringService.getPelanggaran()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -100,5 +102,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
                     }
                 });
     }
+
+
 
 }

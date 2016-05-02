@@ -1,6 +1,7 @@
 package com.monitoringsiswa.monitoringsiswa.ui.fragment;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,8 +36,9 @@ import rx.schedulers.Schedulers;
 public class InputPelanggaranFragment extends android.support.v4.app.Fragment {
     private KategoriSpinnerAdapter kategoriAdapter;
     private PoinSpinnerAdapter poinAdapter;
-    private int kategoriId;
-    private int poinId;
+    private long kategoriId;
+    private long poinId;
+    private static HomeFragment homeFragmentData;
 
     @Inject
     MonitoringService monitoringService;
@@ -50,6 +52,16 @@ public class InputPelanggaranFragment extends android.support.v4.app.Fragment {
 
     public InputPelanggaranFragment() {
         // Required empty public constructor
+    }
+
+    public static InputPelanggaranFragment newInstance(HomeFragment homeFragment) {
+        Bundle args = new Bundle();
+
+        homeFragmentData = homeFragment;
+
+        InputPelanggaranFragment fragment = new InputPelanggaranFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -70,7 +82,7 @@ public class InputPelanggaranFragment extends android.support.v4.app.Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("amsibsam", "id kategori : "+kategoriAdapter.getItemId(position));
                 initPoinPelanggaranSpinner(position);
-                kategoriId = (int) kategoriAdapter.getItem(position);
+                kategoriId = kategoriAdapter.getItemId(position);
             }
 
             @Override
@@ -82,7 +94,7 @@ public class InputPelanggaranFragment extends android.support.v4.app.Fragment {
         binding.spinnerPelanggaran.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                poinId = (int) poinAdapter.getItemId(position);
+                poinId = poinAdapter.getItemId(position);
             }
 
             @Override
@@ -95,7 +107,7 @@ public class InputPelanggaranFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 int guruId = accountInfoStore.getGuruAccount().getId();
-                posPelanggaran(binding.etCatatan.getText().toString(), binding.etNomerInduk.getText().toString(), guruId, Integer.parseInt(binding.etPoin.getText().toString()));
+                posPelanggaran(binding.etCatatan.getText().toString(), binding.etNomerInduk.getText().toString(), guruId, Integer.parseInt(String.valueOf(poinId)));
             }
         });
 
@@ -156,11 +168,16 @@ public class InputPelanggaranFragment extends android.support.v4.app.Fragment {
                         poinAdapter = new PoinSpinnerAdapter(tempList, getContext());
                         binding.spinnerPelanggaran.setAdapter(poinAdapter);
                         poinAdapter.notifyDataSetChanged();
+
+                        
                     }
                 });
     }
 
     private void posPelanggaran(String catatan, String nis, int guruId, int poinPelanggaran){
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Mensubmit..");
+        progressDialog.show();
         monitoringService.postPelanggaran(catatan, nis, guruId, poinPelanggaran)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -172,14 +189,24 @@ public class InputPelanggaranFragment extends android.support.v4.app.Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onNext(String s) {
+                        progressDialog.dismiss();
+                        homeFragmentData.getPelanggaran();
+                        resetInput();
                         Toast.makeText(getActivity(), "Berhasil submit", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void resetInput(){
+        binding.etNomerInduk.setText("");
+        binding.spinnerKategoriPelanggaran.setSelection(0);
+        binding.spinnerPelanggaran.setSelection(0);
+        binding.etCatatan.setText("");
     }
 
 }

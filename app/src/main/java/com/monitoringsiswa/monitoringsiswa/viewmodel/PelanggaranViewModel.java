@@ -35,13 +35,13 @@ public class PelanggaranViewModel extends BaseObservable{
         return pelanggaran.getKelas();
     }
 
-    @Bindable()
-    private int getPoin(){
-        return pelanggaran.getPoin();
+    @Bindable
+    public String getPoin(){
+        return String.valueOf(pelanggaran.getPoin());
     }
 
-    @Bindable()
-    private String getNamaPelanggaran(){
+    @Bindable
+    public String getNamaPelanggaran(){
         return pelanggaran.getNamaPoinPelanggaran();
     }
 }

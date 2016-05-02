@@ -50,7 +50,7 @@ public class MonitoringService {
         Observable<PoinPelanggaranResponse> getPoinPelanggaran(@Path("id") int id);
 
         @FormUrlEncoded
-        @POST
+        @POST("guru/pelanggaran")
         Observable<PostPelanggaranResponse> postPelanggaran(@Field("tanggal") String tanggal,
                                                             @Field("catatan") String catatan,
                                                             @Field("nis") String nis,

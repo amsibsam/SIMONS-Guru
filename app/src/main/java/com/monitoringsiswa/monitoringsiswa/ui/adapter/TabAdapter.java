@@ -13,6 +13,7 @@ import com.monitoringsiswa.monitoringsiswa.ui.fragment.InputPelanggaranFragment;
  */
 public class TabAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
+    HomeFragment tab1 = new HomeFragment();
 
     public TabAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
@@ -24,10 +25,9 @@ public class TabAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                HomeFragment tab1 = new HomeFragment();
                 return tab1;
             case 1:
-                InputPelanggaranFragment tab2 = new InputPelanggaranFragment();
+                InputPelanggaranFragment tab2 = InputPelanggaranFragment.newInstance(tab1);
                 return tab2;
             default:
                 return null;

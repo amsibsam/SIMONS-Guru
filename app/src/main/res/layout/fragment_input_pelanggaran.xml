@@ -90,7 +90,6 @@
                     android:id="@+id/et_catatan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:textSize="18sp"
                     style="@style/EditTextPurple"/>
 

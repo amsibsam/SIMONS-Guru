@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         MonitoringApplication.getComponent().inject(this);
 
         if (accountInfoStore.hasAccount()){
-            startActivity(new Intent(LoginActivity.this, HomeFragment.class));
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             finish();
         }
 

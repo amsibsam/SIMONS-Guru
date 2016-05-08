@@ -30,6 +30,7 @@ public class AccountInfoStore {
         editor.putString("nip", guru.getNip());
         editor.putString("no_hp", guru.getNomorHp());
         editor.putString("jenis_kelamin", guru.getJenisKelamin());
+        editor.commit();
     }
 
     public Guru getGuruAccount(){

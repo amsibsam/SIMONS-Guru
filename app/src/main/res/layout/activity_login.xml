@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".ui.activity.LoginActivity">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/toolar_title"
+                    android:textColor="@android:color/white"
+                    android:text="SIMONS GURU LOGIN"/>
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+        <ImageView
+            android:id="@+id/image_icon"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/toolbar"
+            android:layout_centerHorizontal="true"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/ic_sekolah"/>
+        <LinearLayout
+            android:id="@+id/et_container"
+            android:layout_below="@+id/image_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="18dp"
+            android:paddingLeft="18dp"
+            android:layout_marginTop="32dp">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@android:color/white">
+                <EditText
+                    android:id="@+id/username"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@android:color/white"
+                    android:hint="username"
+                    android:theme="@style/EditTextWhite"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@android:color/white">
+                <EditText
+                    android:id="@+id/password"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@android:color/white"
+                    android:inputType="textPassword"
+                    android:hint="Password"
+                    android:theme="@style/EditTextWhite"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+            <Button
+                android:layout_marginTop="32dp"
+                android:background="@drawable/btn_rounded_accent_color"
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_text_normal"
+                android:textStyle="bold"
+                android:text="LOGIN"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

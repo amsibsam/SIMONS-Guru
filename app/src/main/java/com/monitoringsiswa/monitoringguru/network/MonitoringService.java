@@ -38,8 +38,8 @@ public class MonitoringService {
         @POST("guru/login")
         Observable<LoginResponse> login(@Field("username") String username,
                                         @Field("password") String password);
-        @GET("guru/pelanggaran/1")
-        Observable<PelanggaranResponse> getPelanggaran();
+        @GET("guru/pelanggaran/{id}")
+        Observable<PelanggaranResponse> getPelanggaran(@Path("id") int id);
 
         @GET("guru/kategori-pelanggaran")
         Observable<KategoriPelanggaranResponse> getKategoriPelanggaran();
@@ -113,8 +113,8 @@ public class MonitoringService {
                 });
     }
 
-    public Observable<Pelanggaran> getPelanggaran(){
-        return kilapApi.getPelanggaran()
+    public Observable<Pelanggaran> getPelanggaran(int guruId){
+        return kilapApi.getPelanggaran(guruId)
                 .flatMap(new Func1<PelanggaranResponse, Observable<PelanggaranResponse.Data.Pelanggaran>>() {
                     @Override
                     public Observable<PelanggaranResponse.Data.Pelanggaran> call(PelanggaranResponse pelanggaranResponse) {

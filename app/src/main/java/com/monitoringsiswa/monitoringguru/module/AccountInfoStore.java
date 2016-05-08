@@ -17,6 +17,10 @@ public class AccountInfoStore {
         this.sharedPreferences = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
     }
 
+    public boolean hasAccount(){
+        return sharedPreferences.contains("id");
+    }
+
     public void cacheAccountInfo(Guru guru){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("id", guru.getId());

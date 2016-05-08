@@ -16,6 +16,7 @@ import com.monitoringsiswa.monitoringguru.BR;
 import com.monitoringsiswa.monitoringguru.MonitoringApplication;
 import com.monitoringsiswa.monitoringguru.R;
 import com.monitoringsiswa.monitoringguru.databinding.FragmentHomeBinding;
+import com.monitoringsiswa.monitoringguru.module.AccountInfoStore;
 import com.monitoringsiswa.monitoringguru.network.MonitoringService;
 import com.monitoringsiswa.monitoringguru.pojo.Pelanggaran;
 import com.monitoringsiswa.monitoringguru.viewmodel.PelanggaranViewModel;
@@ -36,6 +37,9 @@ public class HomeFragment extends android.support.v4.app.Fragment {
 
     @Inject
     MonitoringService monitoringService;
+
+    @Inject
+    AccountInfoStore accountInfoStore;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -72,7 +76,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     public void getPelanggaran(){
         binding.pbLoading.setVisibility(View.VISIBLE);
         pelanggaranListViewModel.items.clear();
-        monitoringService.getPelanggaran()
+        monitoringService.getPelanggaran(accountInfoStore.getGuruAccount().getId())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<Pelanggaran>() {

@@ -15,6 +15,7 @@ import com.monitoringsiswa.monitoringguru.databinding.ActivityLoginBinding;
 import com.monitoringsiswa.monitoringguru.module.AccountInfoStore;
 import com.monitoringsiswa.monitoringguru.network.MonitoringService;
 import com.monitoringsiswa.monitoringguru.pojo.Guru;
+import com.monitoringsiswa.monitoringguru.ui.fragment.HomeFragment;
 
 import javax.inject.Inject;
 
@@ -35,6 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MonitoringApplication.getComponent().inject(this);
+
+        if (accountInfoStore.hasAccount()){
+            startActivity(new Intent(LoginActivity.this, HomeFragment.class));
+        }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
@@ -72,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onNext(Guru guru) {
                         progressDialog.dismiss();
+                        accountInfoStore.cacheAccountInfo(guru);
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     }
                 });

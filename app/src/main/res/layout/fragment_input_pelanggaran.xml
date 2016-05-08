@@ -74,9 +74,12 @@
                 <EditText
                     android:id="@+id/et_poin"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:inputType="number"
                     android:textSize="18sp"
+                    android:enabled="false"
+                    android:background="@android:color/white"
+                    android:paddingLeft="16dp"
                     style="@style/EditTextPurple"/>
 
                 <TextView

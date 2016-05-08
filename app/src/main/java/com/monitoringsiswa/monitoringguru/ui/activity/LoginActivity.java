@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (accountInfoStore.hasAccount()){
             startActivity(new Intent(LoginActivity.this, HomeFragment.class));
+            finish();
         }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         accountInfoStore.cacheAccountInfo(guru);
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        finish();
                     }
                 });
     }

@@ -94,7 +94,10 @@ public class InputPelanggaranFragment extends android.support.v4.app.Fragment {
         binding.spinnerPelanggaran.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                PoinPelanggaran poinPelanggaran = (PoinPelanggaran) poinAdapter.getItem(position);
+
                 poinId = poinAdapter.getItemId(position);
+                binding.etPoin.setText(String.valueOf(poinPelanggaran.getPoin()));
             }
 
             @Override

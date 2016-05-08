@@ -6,7 +6,7 @@
 
         <variable
             name="itemViewModel"
-            type="com.monitoringsiswa.monitoringsiswa.viewmodel.PelanggaranViewModel" />
+            type="com.monitoringsiswa.monitoringguru.viewmodel.PelanggaranViewModel" />
     </data>
 
     <RelativeLayout

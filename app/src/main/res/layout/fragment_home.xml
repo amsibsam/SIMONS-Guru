@@ -4,13 +4,13 @@
     <data>
         <variable
             name="pelanggaranListViewModel"
-            type="com.monitoringsiswa.monitoringsiswa.ui.fragment.HomeFragment.PelanggaranListViewModel"/>
+            type="com.monitoringsiswa.monitoringguru.ui.fragment.HomeFragment.PelanggaranListViewModel"/>
     </data>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context="com.monitoringsiswa.monitoringsiswa.ui.fragment.HomeFragment">
+    tools:context="com.monitoringsiswa.monitoringguru.ui.fragment.HomeFragment">
     <ProgressBar
         android:id="@+id/pbLoading"
         android:layout_width="50dp"
